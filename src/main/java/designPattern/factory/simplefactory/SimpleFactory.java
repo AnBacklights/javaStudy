@@ -1,4 +1,4 @@
-package simplefactory;
+package designPattern.factory.simplefactory;
 
 public class SimpleFactory {
     public Product createProduct(int type) {
