@@ -3,14 +3,29 @@ package io.aio;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
+import java.nio.channels.AsynchronousChannelGroup;
 import java.nio.channels.AsynchronousServerSocketChannel;
 import java.nio.channels.AsynchronousSocketChannel;
 import java.nio.channels.CompletionHandler;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class Server {
     public static void main(String[] args) throws Exception {
+
+        /**
+         * 加上线程池
+         */
+        /*
+        ExecutorService executorService = Executors.newCachedThreadPool();
+        AsynchronousChannelGroup threadGroup = AsynchronousChannelGroup.withCachedThreadPool(executorService, 1);
+
+        final AsynchronousServerSocketChannel serverChannel = AsynchronousServerSocketChannel.open(threadGroup)
+                .bind(new InetSocketAddress(8888));*/
+
         final AsynchronousServerSocketChannel serverChannel = AsynchronousServerSocketChannel.open()
                 .bind(new InetSocketAddress(8888));
+
 
         serverChannel.accept(null, new CompletionHandler<AsynchronousSocketChannel, Object>() {
             @Override
